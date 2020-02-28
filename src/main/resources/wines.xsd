@@ -1,15 +1,12 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:tns="itmo.com/wst"
-           targetNamespace="itmo.com/wst" elementFormDefault="qualified">
+           targetNamespace="itmo.com/wst"
+           elementFormDefault="qualified">
 
     <xs:element name="getWineRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="id" type="xs:integer"/>
-                <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="sugar" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="rating" type="xs:float" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="wine" type="tns:wine"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -25,10 +22,10 @@
     <xs:complexType name="wine">
         <xs:sequence>
             <xs:element name="id" type="xs:integer"/>
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="sugar" type="tns:sugar"/>
-            <xs:element name="color" type="tns:color"/>
-            <xs:element name="rating" type="xs:float"/>
+            <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="sugar" type="tns:sugar" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="color" type="tns:color" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="rating" type="xs:float" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 

@@ -39,3 +39,5 @@ README.html
 request.xml
 output.xml
 /.mvn/
+
+src/main/java/META-INF/JAXB/
