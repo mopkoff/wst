@@ -1,4 +1,4 @@
-package com.example.producingwebservice;
+package com.itmo.wst;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
