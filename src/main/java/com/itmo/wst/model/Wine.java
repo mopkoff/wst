@@ -9,6 +9,10 @@
 package com.itmo.wst.model;
 
 import java.math.BigInteger;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -47,14 +51,18 @@ import javax.xml.bind.annotation.XmlType;
     "color",
     "rating"
 })
+@Entity
 public class Wine {
 
+    @Id
     @XmlElement(required = true)
     protected BigInteger id;
     protected String name;
+    @Enumerated(EnumType.STRING)
     @XmlSchemaType(name = "string")
     protected Sugar sugar;
     @XmlSchemaType(name = "string")
+    @Enumerated(EnumType.STRING)
     protected Color color;
     protected Float rating;
 

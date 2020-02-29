@@ -15,12 +15,8 @@ import java.math.BigInteger;
 public class WineEndpoint {
 	private static final String NAMESPACE_URI = "itmo.com/wst";
 
-	private WineRepository wineRepository;
-
 	@Autowired
-	public WineEndpoint(WineRepository wineRepository) {
-		this.wineRepository = wineRepository;
-	}
+	private WineRepository wineRepository;
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getWineRequest")
 	@ResponsePayload

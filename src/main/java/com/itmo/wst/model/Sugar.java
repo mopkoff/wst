@@ -35,13 +35,13 @@ import javax.xml.bind.annotation.XmlType;
 public enum Sugar {
 
     @XmlEnumValue("dry")
-    DRY("dry"),
-    @XmlEnumValue("semi-dry")
-    SEMI_DRY("semi-dry"),
-    @XmlEnumValue("semi-sweet")
-    SEMI_SWEET("semi-sweet"),
+    dry("dry"),
+    @XmlEnumValue("semi_dry")
+    semi_dry("semi_dry"),
+    @XmlEnumValue("semi_sweet")
+    semi_sweet("semi_sweet"),
     @XmlEnumValue("sweet")
-    SWEET("sweet");
+    sweet("sweet");
     private final String value;
 
     Sugar(String v) {
