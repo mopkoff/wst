@@ -2,6 +2,8 @@ package com.itmo.wst;
 
 import com.itmo.wst.model.Sugar;
 import com.itmo.wst.model.Wine;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +17,9 @@ import java.util.List;
 import java.util.List;
 
 public class WineRepositoryImpl implements  WineRepositoryCustom {
-
+    @Autowired
+    @Lazy
+    WineRepository wineRepository;
     @PersistenceContext
     EntityManager entityManager;
 

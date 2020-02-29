@@ -8,27 +8,24 @@
 
 package com.itmo.wst.model;
 
-import java.math.BigInteger;
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for wine complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="wine"&gt;
+ * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}integer"/&gt;
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="sugar" type="{itmo.com/wst}sugar" minOccurs="0"/&gt;
  *         &lt;element name="color" type="{itmo.com/wst}color" minOccurs="0"/&gt;
  *         &lt;element name="rating" type="{http://www.w3.org/2001/XMLSchema}float" minOccurs="0"/&gt;
@@ -41,53 +38,21 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "wine", propOrder = {
-    "id",
+@XmlType(name = "", propOrder = {
     "name",
     "sugar",
     "color",
     "rating"
 })
-@Entity
-public class Wine {
+@XmlRootElement(name = "createWineRequest")
+public class CreateWineRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @XmlElement(required = true)
-    protected BigInteger id;
-    @XmlElement(required = true)
     protected String name;
-    @Enumerated(EnumType.STRING)
     @XmlSchemaType(name = "string")
     protected Sugar sugar;
-    @Enumerated(EnumType.STRING)
     @XmlSchemaType(name = "string")
     protected Color color;
     protected Float rating;
-
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
-
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
 
     /**
      * Gets the value of the name property.
