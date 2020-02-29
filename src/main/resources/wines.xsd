@@ -3,26 +3,10 @@
            targetNamespace="itmo.com/wst"
            elementFormDefault="qualified">
 
-    <xs:element name="getWineRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="wine" type="tns:wine"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="getWineResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="wine" type="tns:wine" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
     <xs:complexType name="wine">
         <xs:sequence>
             <xs:element name="id" type="xs:integer"/>
-            <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="name" type="xs:string"/>
             <xs:element name="sugar" type="tns:sugar" minOccurs="0" maxOccurs="1"/>
             <xs:element name="color" type="tns:color" minOccurs="0" maxOccurs="1"/>
             <xs:element name="rating" type="xs:float" minOccurs="0" maxOccurs="1"/>
@@ -45,4 +29,79 @@
             <xs:enumeration value="RED"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:simpleType name="operation_status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUCCESS"/>
+            <xs:enumeration value="FAILED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="getWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="wine" type="tns:wine"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="wine" type="tns:wine" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="sugar" type="tns:sugar" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="color" type="tns:color" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="rating" type="xs:float" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="wine" type="tns:wine"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="operation_status" type="tns:operation_status"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="operation_status" type="tns:operation_status"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>
