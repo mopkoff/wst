@@ -31,18 +31,18 @@
 
     <xs:simpleType name="sugar">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="dry"/>
-            <xs:enumeration value="semi-dry"/>
-            <xs:enumeration value="semi-sweet"/>
-            <xs:enumeration value="sweet"/>
+            <xs:enumeration value="DRY"/>
+            <xs:enumeration value="SEMI_DRY"/>
+            <xs:enumeration value="SEMI_SWEET"/>
+            <xs:enumeration value="SWEET"/>
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="color">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="rose"/>
-            <xs:enumeration value="white"/>
-            <xs:enumeration value="red"/>
+            <xs:enumeration value="ROSE"/>
+            <xs:enumeration value="WHITE"/>
+            <xs:enumeration value="RED"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

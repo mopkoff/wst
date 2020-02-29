@@ -22,7 +22,7 @@ public class WineEndpoint {
 	@ResponsePayload
 	public GetWineResponse getWine(@RequestPayload GetWineRequest request) {
 		GetWineResponse response = new GetWineResponse();
-		response.setWine(wineRepository.findByWine(request.getWine()).get(0));
+		response.getWine().addAll(wineRepository.findByWine(request.getWine()));
 
 		return response;
 	}
