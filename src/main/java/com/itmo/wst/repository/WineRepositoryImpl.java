@@ -1,26 +1,23 @@
-package com.itmo.wst;
+package com.itmo.wst.repository;
 
-import com.itmo.wst.model.Sugar;
 import com.itmo.wst.model.Wine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.List;
-
 import java.util.List;
 
 public class WineRepositoryImpl implements  WineRepositoryCustom {
     @Autowired
     @Lazy
-    WineRepository wineRepository;
+    public
+    WineRepository baseRepository;
     @PersistenceContext
+    public
     EntityManager entityManager;
 
     public List<Wine> findByWine(Wine wine) {

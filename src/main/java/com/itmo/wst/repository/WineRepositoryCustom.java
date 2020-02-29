@@ -1,9 +1,9 @@
-package com.itmo.wst;
+package com.itmo.wst.repository;
 
 import com.itmo.wst.model.Wine;
 
 import java.util.List;
 
 public interface WineRepositoryCustom {
-    public List<Wine> findByWine(Wine wine);
+    List<Wine> findByWine(Wine wine);
 }

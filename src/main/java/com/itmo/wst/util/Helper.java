@@ -1,5 +1,8 @@
-package com.itmo.wst.model;
+package com.itmo.wst.util;
 
+import com.itmo.wst.model.CreateWineRequest;
+import com.itmo.wst.model.UpdateWineRequest;
+import com.itmo.wst.model.Wine;
 import org.springframework.util.StringUtils;
 
 public class Helper {

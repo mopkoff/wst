@@ -30,10 +30,10 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="operation_status">
+    <xs:simpleType name="status">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="SUCCESS"/>
             <xs:enumeration value="FAILED"/>
+            <xs:enumeration value="SUCCESS"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -83,7 +83,7 @@
     <xs:element name="updateWineResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="operation_status" type="tns:operation_status"/>
+                <xs:element name="status" type="tns:status"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -99,7 +99,7 @@
     <xs:element name="deleteWineResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="operation_status" type="tns:operation_status"/>
+                <xs:element name="status" type="tns:status"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

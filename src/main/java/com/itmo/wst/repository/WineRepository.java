@@ -1,4 +1,4 @@
-package com.itmo.wst;
+package com.itmo.wst.repository;
 
 import java.math.BigInteger;
 import java.util.List;
