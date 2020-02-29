@@ -16,13 +16,13 @@ public class WineEndpoint {
 	private static final String NAMESPACE_URI = "itmo.com/wst";
 
 	@Autowired
-	private WineRepository wineRepository;
+	private WineRepositoryImpl wineRepository;
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getWineRequest")
 	@ResponsePayload
 	public GetWineResponse getWine(@RequestPayload GetWineRequest request) {
 		GetWineResponse response = new GetWineResponse();
-		response.setWine(wineRepository.findAllByName("Tinto").get(0));
+		response.setWine(wineRepository.findByWine(request.getWine()).get(0));
 
 		return response;
 	}

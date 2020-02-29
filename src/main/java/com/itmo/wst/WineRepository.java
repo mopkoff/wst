@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WineRepository extends JpaRepository<Wine, BigInteger> {
 	Optional<Wine> findById(BigInteger id);
+	List<Wine> findAllByNameAndId(String name, BigInteger id);
 	List<Wine> findAllByName(String name);
+
 //	private static final Map<String, Wine> wines = new HashMap<>();
 //
 //	@PostConstruct

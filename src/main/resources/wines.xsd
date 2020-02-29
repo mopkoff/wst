@@ -14,7 +14,7 @@
     <xs:element name="getWineResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="wine" type="tns:wine"/>
+                <xs:element name="wine" type="tns:wine" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
