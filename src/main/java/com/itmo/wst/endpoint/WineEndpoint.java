@@ -8,6 +8,10 @@ import com.itmo.wst.model.*;
 import com.itmo.wst.util.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -16,16 +20,13 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import javax.transaction.Transactional;
 
 
-@Endpoint
+@RestController
 public class WineEndpoint {
-	private static final String NAMESPACE_URI = "itmo.com/wst";
-
 	@Autowired
 	private WineRepositoryImpl wineRepository;
 
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getWineRequest")
-	@ResponsePayload
-	public GetWineResponse getWine(@RequestPayload GetWineRequest request) throws IncorrectFormatException {
+	@RequestMapping(value = "rest/wines/get", method = RequestMethod.POST)
+	public GetWineResponse getWine(@RequestBody GetWineRequest request) throws IncorrectFormatException {
 		GetWineResponse response = new GetWineResponse();
 		try {
 			response.getWine().addAll(wineRepository.findByWine(request.getWine()));
@@ -38,10 +39,10 @@ public class WineEndpoint {
 		return response;
 	}
 
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "createWineRequest")
-	@ResponsePayload
+
 	@Transactional
-	public CreateWineResponse createWine(@RequestPayload CreateWineRequest request) throws IncorrectFormatException {
+	@RequestMapping(value = "rest/wines", method = RequestMethod.POST)
+	public CreateWineResponse createWine(@RequestBody CreateWineRequest request) throws IncorrectFormatException {
 		CreateWineResponse response = new CreateWineResponse();
 		try {
 			Wine wine = Helper.createNewWine(request);
@@ -57,10 +58,9 @@ public class WineEndpoint {
 		return response;
 	}
 
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateWineRequest")
-	@ResponsePayload
 	@Transactional
-	public UpdateWineResponse updateWine(@RequestPayload UpdateWineRequest request) throws WineNotFoundException, IncorrectFormatException {
+	@RequestMapping(value = "rest/wines", method = RequestMethod.PUT)
+	public UpdateWineResponse updateWine(@RequestBody UpdateWineRequest request) throws WineNotFoundException, IncorrectFormatException {
 		UpdateWineResponse response = new UpdateWineResponse();
 		response.setStatus(Status.FAILED);
 		try {
@@ -81,10 +81,9 @@ public class WineEndpoint {
 		return response;
 	}
 
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteWineRequest")
-	@ResponsePayload
 	@Transactional
-	public DeleteWineResponse deleteWine(@RequestPayload DeleteWineRequest request) throws WineNotFoundException, IncorrectFormatException {
+	@RequestMapping(value = "rest/wines", method = RequestMethod.DELETE)
+	public DeleteWineResponse deleteWine(@RequestBody DeleteWineRequest request) throws WineNotFoundException, IncorrectFormatException {
 		DeleteWineResponse response = new DeleteWineResponse();
 		response.setStatus(Status.FAILED);
 		try {
