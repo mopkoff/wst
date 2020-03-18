@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="itmo.com/wst" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="itmo.com/wst" targetNamespace="itmo.com/wst">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="itmo.com/wst">
+
+    <xs:complexType name="wine">
+        <xs:sequence>
+            <xs:element name="id" type="xs:integer"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="sugar" type="tns:sugar"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="color" type="tns:color"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="rating" type="xs:float"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="sugar">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DRY"/>
+            <xs:enumeration value="SEMI_DRY"/>
+            <xs:enumeration value="SEMI_SWEET"/>
+            <xs:enumeration value="SWEET"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="color">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ROSE"/>
+            <xs:enumeration value="WHITE"/>
+            <xs:enumeration value="RED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FAILED"/>
+            <xs:enumeration value="SUCCESS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="getWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="wine" type="tns:wine"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="wine" type="tns:wine"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="name" type="xs:string"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="sugar" type="tns:sugar"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="color" type="tns:color"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="rating" type="xs:float"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="wine" type="tns:wine"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="tns:status"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteWineRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteWineResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="tns:status"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getWineResponse">
+    <wsdl:part element="tns:getWineResponse" name="getWineResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteWineRequest">
+    <wsdl:part element="tns:deleteWineRequest" name="deleteWineRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteWineResponse">
+    <wsdl:part element="tns:deleteWineResponse" name="deleteWineResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWineRequest">
+    <wsdl:part element="tns:getWineRequest" name="getWineRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createWineResponse">
+    <wsdl:part element="tns:createWineResponse" name="createWineResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateWineResponse">
+    <wsdl:part element="tns:updateWineResponse" name="updateWineResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateWineRequest">
+    <wsdl:part element="tns:updateWineRequest" name="updateWineRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createWineRequest">
+    <wsdl:part element="tns:createWineRequest" name="createWineRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WinesPort">
+    <wsdl:operation name="getWine">
+      <wsdl:input message="tns:getWineRequest" name="getWineRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getWineResponse" name="getWineResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteWine">
+      <wsdl:input message="tns:deleteWineRequest" name="deleteWineRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteWineResponse" name="deleteWineResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createWine">
+      <wsdl:input message="tns:createWineRequest" name="createWineRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createWineResponse" name="createWineResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWine">
+      <wsdl:input message="tns:updateWineRequest" name="updateWineRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateWineResponse" name="updateWineResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WinesPortSoap11" type="tns:WinesPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getWine">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getWineRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getWineResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteWine">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deleteWineRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteWineResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createWine">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createWineRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createWineResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWine">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateWineRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateWineResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WinesPortService">
+    <wsdl:port binding="tns:WinesPortSoap11" name="WinesPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
