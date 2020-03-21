@@ -13,10 +13,14 @@ import com.itmo.wst.wsdl.*;
 
 @SpringBootApplication
 public class ConsumingWebServiceApplication {
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_BLACK = "\033[1;30m";
+    private static final String ANSI_RED = "\033[1;31m";
+    private static final String ANSI_GREEN = "\033[1;32m";
 
-	public static void main(String[] args) {
-		SpringApplication.run(ConsumingWebServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ConsumingWebServiceApplication.class, args);
+    }
 
     @Bean
     CommandLineRunner lookup(WineClient wineClient) {
@@ -24,7 +28,7 @@ public class ConsumingWebServiceApplication {
             Scanner in = new Scanner(System.in);
 
             while (true) {
-                System.out.println("Enter an operation number:\n\t1.Get wine\n\t2.Create wine\n\t3.Update wine\n\t4.Delete wine\n\t5.Find wines\n\t6.Exit");
+                printRegular("Enter an operation number:\n\t1.Get wine\n\t2.Create wine\n\t3.Update wine\n\t4.Delete wine\n\t5.Find wines\n\t6.Exit");
                 switch (in.nextLine()) {
                     case "1": {
                         Wine wine = new Wine();
@@ -34,7 +38,7 @@ public class ConsumingWebServiceApplication {
 
                         List<Wine> wines = response.getWine();
                         if (wines.isEmpty()) {
-                            System.out.println("Wine is not found!");
+                            printRed("Wine is not found!");
                         } else {
                             printWine(wines.get(0));
                         }
@@ -51,7 +55,7 @@ public class ConsumingWebServiceApplication {
                     case "6":
                         return;
                     default:
-                        System.out.println("Incorrect operation! Try again!");
+                        printRed("Incorrect operation! Try again!");
                         break;
                 }
             }
@@ -60,11 +64,11 @@ public class ConsumingWebServiceApplication {
 
     private int getConsoleInt(String msg) {
         Scanner in = new Scanner(System.in);
-	    String line;
+        String line;
 
-	    while (true) {
-	        System.out.println(msg);
-	        try {
+        while (true) {
+            printRegular(msg);
+            try {
                 line = in.nextLine();
                 return Integer.parseInt(line);
             } catch(Exception e) {
@@ -74,10 +78,22 @@ public class ConsumingWebServiceApplication {
     }
 
     private void printWine(Wine wine) {
-        System.out.println("\tid:\t\t" + wine.getId());
-        System.out.println("\tname:\t" + wine.getName());
-        System.out.println("\tcolor:\t" + wine.getColor());
-        System.out.println("\tsugar:\t" + wine.getSugar());
-        System.out.println("\trating:\t" + wine.getRating());
+        printGreen("id:\t\t" + wine.getId());
+        printGreen("name:\t" + wine.getName());
+        printGreen("color:\t" + wine.getColor());
+        printGreen("sugar:\t" + wine.getSugar());
+        printGreen("rating:\t" + wine.getRating());
+    }
+
+    private void printRegular(String line) {
+        System.out.println(ANSI_BLACK + line + ANSI_RESET);
+    }
+
+    private void printRed(String line) {
+        System.out.println(ANSI_RED + line + ANSI_RESET);
+    }
+
+    private void printGreen(String line) {
+        System.out.println(ANSI_GREEN + line + ANSI_RESET);
     }
 }
