@@ -32,7 +32,7 @@ public class ConsumingWebServiceApplication {
                 switch (in.nextLine()) {
                     case "1": {
                         Wine wine = new Wine();
-                        BigInteger id = BigInteger.valueOf(getConsoleInt("Enter a wine id:"));
+                        BigInteger id = getConsoleId("Enter a wine id:", true);
                         wine.setId(id);
                         GetWineResponse response = wineClient.getWine(wine);
 
@@ -49,7 +49,7 @@ public class ConsumingWebServiceApplication {
                     case "3":
                         break;
                     case "4": {
-                        BigInteger id = BigInteger.valueOf(getConsoleInt("Enter a wine id:"));
+                        BigInteger id = getConsoleId("Enter a wine id:", true);
                         Status status = wineClient.deleteWine(id).getStatus();
 
                         if (status == Status.SUCCESS) {
@@ -71,7 +71,7 @@ public class ConsumingWebServiceApplication {
         };
     }
 
-    private int getConsoleInt(String msg) {
+    private BigInteger getConsoleId(String msg, Boolean isRequired) {
         Scanner in = new Scanner(System.in);
         String line;
 
@@ -79,11 +79,107 @@ public class ConsumingWebServiceApplication {
             printRegular(msg);
             try {
                 line = in.nextLine();
-                return Integer.parseInt(line);
-            } catch(Exception e) {
 
+                if (isRequired || !line.isEmpty()) {
+                    return BigInteger.valueOf(Integer.parseInt(line));
+                } else {
+                    return null;
+                }
+            } catch(Exception e) {
             }
         }
+    }
+
+    private String getConsoleName(String msg, Boolean isRequired) {
+        Scanner in = new Scanner(System.in);
+        String line;
+
+        while (true) {
+            printRegular(msg);
+            line = in.nextLine();
+
+            if (!line.isEmpty()) {
+                return line;
+            } else if (!isRequired) {
+                return null;
+            }
+        }
+    }
+
+    private Color getConsoleColor(String msg, Boolean isRequired) {
+        Scanner in = new Scanner(System.in);
+        String line;
+
+        while (true) {
+            printRegular(msg);
+            line = in.nextLine().toUpperCase();
+
+            if (line.equals("RED")) return Color.RED;
+            if (line.equals("ROSE")) return Color.ROSE;
+            if (line.equals("WHITE")) return Color.WHITE;
+            if (!isRequired && line.isEmpty()) return null;
+        }
+    }
+
+    private Sugar getConsoleSugar(String msg, Boolean isRequired) {
+        Scanner in = new Scanner(System.in);
+        String line;
+
+        while (true) {
+            printRegular(msg);
+            line = in.nextLine().toUpperCase();
+
+            if (line.equals("DRY")) return Sugar.DRY;
+            if (line.equals("SWEET")) return Sugar.SWEET;
+            if (line.equals("SEMI_DRY")) return Sugar.SEMI_DRY;
+            if (line.equals("SEMI_SWEET")) return Sugar.SEMI_SWEET;
+            if (!isRequired && line.isEmpty()) return null;
+        }
+    }
+
+    private Float getConsoleRating(String msg, Boolean isRequired){
+        Scanner in = new Scanner(System.in);
+        String line;
+
+        while (true) {
+            printRegular(msg);
+            try {
+                line = in.nextLine();
+
+                if (isRequired || !line.isEmpty()) {
+                    Float rating = Float.parseFloat(line);
+                    if (0 <= rating && rating <= 5)
+                        return rating;
+                } else {
+                    return null;
+                }
+            } catch(Exception e) {
+            }
+        }
+    }
+
+    private Wine getConsoleWine(Boolean withId, Boolean isRequired) {
+        Wine wine = new Wine();
+
+        if (withId) {
+            BigInteger id = getConsoleId("Enter an id:", isRequired);
+            if (id != null)
+                wine.setId(id);
+        }
+        String name = getConsoleName("Enter a name:", isRequired);
+        if (name != null)
+            wine.setName(name);
+        Sugar sugar = getConsoleSugar("Enter a sugar (DRY, SEMI_DRY, SEMI_SWEET, SWEET):", isRequired);
+        if (sugar != null)
+            wine.setSugar(sugar);
+        Color color = getConsoleColor("Enter a color (ROSE, WHITE, RED):", isRequired);
+        if (color != null)
+            wine.setColor(color);
+        Float rating = getConsoleRating("Enter a rating [0;5]:", isRequired);
+        if (rating != null)
+            wine.setRating(rating);
+
+        return wine;
     }
 
     private void printWine(Wine wine) {
