@@ -73,6 +73,17 @@ public class ConsumingWebServiceApplication {
                         break;
                     }
                     case "5": {
+                        Wine wine = getConsoleWine(true, false);
+                        List<Wine> wines = wineClient.getWine(wine).getWine();
+
+                        if (wines.isEmpty()) {
+                            printRed("Wine is not found!");
+                        } else {
+                            for (Wine wine_i : wines) {
+                                printWine(wine_i);
+                                printRegular("");
+                            }
+                        }
                         break;
                     }
                     case "6": {
