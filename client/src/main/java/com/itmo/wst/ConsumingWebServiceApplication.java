@@ -112,17 +112,17 @@ public class ConsumingWebServiceApplication {
                 } else {
                     return null;
                 }
-            } catch(Exception e) {
+            } catch(Exception ignored) {
             }
         }
     }
 
-    private String getConsoleName(String msg, Boolean isRequired) {
+    private String getConsoleName(Boolean isRequired) {
         Scanner in = new Scanner(System.in);
         String line;
 
         while (true) {
-            printRegular(msg);
+            printRegular("Enter a name:");
             line = in.nextLine();
 
             if (!line.isEmpty()) {
@@ -133,12 +133,12 @@ public class ConsumingWebServiceApplication {
         }
     }
 
-    private Color getConsoleColor(String msg, Boolean isRequired) {
+    private Color getConsoleColor(Boolean isRequired) {
         Scanner in = new Scanner(System.in);
         String line;
 
         while (true) {
-            printRegular(msg);
+            printRegular("Enter a color (ROSE, WHITE, RED):");
             line = in.nextLine().toUpperCase();
 
             if (line.equals("RED")) return Color.RED;
@@ -148,12 +148,12 @@ public class ConsumingWebServiceApplication {
         }
     }
 
-    private Sugar getConsoleSugar(String msg, Boolean isRequired) {
+    private Sugar getConsoleSugar(Boolean isRequired) {
         Scanner in = new Scanner(System.in);
         String line;
 
         while (true) {
-            printRegular(msg);
+            printRegular("Enter a sugar (DRY, SEMI_DRY, SEMI_SWEET, SWEET):");
             line = in.nextLine().toUpperCase();
 
             if (line.equals("DRY")) return Sugar.DRY;
@@ -164,12 +164,12 @@ public class ConsumingWebServiceApplication {
         }
     }
 
-    private Float getConsoleRating(String msg, Boolean isRequired){
+    private Float getConsoleRating(Boolean isRequired){
         Scanner in = new Scanner(System.in);
         String line;
 
         while (true) {
-            printRegular(msg);
+            printRegular("Enter a rating [0;5]:");
             try {
                 line = in.nextLine();
 
@@ -180,7 +180,7 @@ public class ConsumingWebServiceApplication {
                 } else {
                     return null;
                 }
-            } catch(Exception e) {
+            } catch(Exception ignored) {
             }
         }
     }
@@ -193,16 +193,16 @@ public class ConsumingWebServiceApplication {
             if (id != null)
                 wine.setId(id);
         }
-        String name = getConsoleName("Enter a name:", isRequired);
+        String name = getConsoleName(isRequired);
         if (name != null)
             wine.setName(name);
-        Sugar sugar = getConsoleSugar("Enter a sugar (DRY, SEMI_DRY, SEMI_SWEET, SWEET):", isRequired);
+        Sugar sugar = getConsoleSugar(isRequired);
         if (sugar != null)
             wine.setSugar(sugar);
-        Color color = getConsoleColor("Enter a color (ROSE, WHITE, RED):", isRequired);
+        Color color = getConsoleColor(isRequired);
         if (color != null)
             wine.setColor(color);
-        Float rating = getConsoleRating("Enter a rating [0;5]:", isRequired);
+        Float rating = getConsoleRating(isRequired);
         if (rating != null)
             wine.setRating(rating);
 
