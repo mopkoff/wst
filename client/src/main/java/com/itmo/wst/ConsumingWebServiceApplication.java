@@ -44,10 +44,15 @@ public class ConsumingWebServiceApplication {
                         }
                         break;
                     }
-                    case "2":
+                    case "2": {
+                        Wine wine = getConsoleWine(false, true);
+                        CreateWineResponse response = wineClient.createWine(wine);
+                        printGreen("Wine's id: " + response.getId());
                         break;
-                    case "3":
+                    }
+                    case "3": {
                         break;
+                    }
                     case "4": {
                         BigInteger id = getConsoleId("Enter a wine id:", true);
                         Status status = wineClient.deleteWine(id).getStatus();
@@ -59,13 +64,16 @@ public class ConsumingWebServiceApplication {
                         }
                         break;
                     }
-                    case "5":
+                    case "5": {
                         break;
-                    case "6":
+                    }
+                    case "6": {
                         return;
-                    default:
+                    }
+                    default: {
                         printRed("Incorrect operation! Try again!");
                         break;
+                    }
                 }
             }
         };
