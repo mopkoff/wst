@@ -51,6 +51,14 @@ public class ConsumingWebServiceApplication {
                         break;
                     }
                     case "3": {
+                        Wine wine = getConsoleWine(true, false);
+                        Status status = wineClient.updateWine(wine).getStatus();
+
+                        if (status == Status.SUCCESS) {
+                            printGreen("Success");
+                        } else {
+                            printRed("Failed");
+                        }
                         break;
                     }
                     case "4": {
