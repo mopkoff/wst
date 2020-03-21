@@ -48,8 +48,17 @@ public class ConsumingWebServiceApplication {
                         break;
                     case "3":
                         break;
-                    case "4":
+                    case "4": {
+                        BigInteger id = BigInteger.valueOf(getConsoleInt("Enter a wine id:"));
+                        Status status = wineClient.deleteWine(id).getStatus();
+
+                        if (status == Status.SUCCESS) {
+                            printGreen("Success");
+                        } else {
+                            printRed("Failed");
+                        }
                         break;
+                    }
                     case "5":
                         break;
                     case "6":
