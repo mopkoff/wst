@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import com.itmo.wst.wsdl.*;
 
@@ -31,58 +32,78 @@ public class ConsumingWebServiceApplication {
                 printRegular("Enter an operation number:\n\t1.Get wine\n\t2.Create wine\n\t3.Update wine\n\t4.Delete wine\n\t5.Find wines\n\t6.Exit");
                 switch (in.nextLine()) {
                     case "1": {
-                        Wine wine = new Wine();
-                        BigInteger id = getConsoleId("Enter a wine id:", true);
-                        wine.setId(id);
-                        GetWineResponse response = wineClient.getWine(wine);
+                        try {
+                            Wine wine = new Wine();
+                            BigInteger id = getConsoleId("Enter a wine id:", true);
+                            wine.setId(id);
+                            GetWineResponse response = wineClient.getWine(wine);
 
-                        List<Wine> wines = response.getWine();
-                        if (wines.isEmpty()) {
-                            printRed("Wine is not found!");
-                        } else {
-                            printWine(wines.get(0));
+                            List<Wine> wines = response.getWine();
+                            if (wines.isEmpty()) {
+                                printRed("Wine is not found!");
+                            } else {
+                                printWine(wines.get(0));
+                            }
+                        } catch (SoapFaultClientException e){
+                            printRed(e.getFaultStringOrReason());
                         }
                         break;
                     }
                     case "2": {
-                        Wine wine = getConsoleWine(false, true);
-                        CreateWineResponse response = wineClient.createWine(wine);
-                        printGreen("Wine's id: " + response.getId());
+                        try {
+                            Wine wine = getConsoleWine(false, true);
+                            CreateWineResponse response = wineClient.createWine(wine);
+                            printGreen("Wine's id: " + response.getId());
+                        } catch (SoapFaultClientException e){
+                            printRed(e.getFaultStringOrReason());
+                        }
                         break;
                     }
                     case "3": {
-                        Wine wine = getConsoleWine(true, false);
-                        Status status = wineClient.updateWine(wine).getStatus();
+                        try {
+                            Wine wine = getConsoleWine(true, false);
+                            Status status = wineClient.updateWine(wine).getStatus();
 
-                        if (status == Status.SUCCESS) {
-                            printGreen("Success");
-                        } else {
-                            printRed("Failed");
+                            if (status == Status.SUCCESS) {
+                                printGreen("Success");
+                            } else {
+                                printRed("Failed");
+                            }
+                        } catch (SoapFaultClientException e){
+                            printRed(e.getFaultStringOrReason());
                         }
                         break;
                     }
                     case "4": {
-                        BigInteger id = getConsoleId("Enter a wine id:", true);
-                        Status status = wineClient.deleteWine(id).getStatus();
+                        try {
+                            BigInteger id = getConsoleId("Enter a wine id:", true);
+                            Status status = wineClient.deleteWine(id).getStatus();
 
-                        if (status == Status.SUCCESS) {
-                            printGreen("Success");
-                        } else {
-                            printRed("Failed");
+                            if (status == Status.SUCCESS) {
+                                printGreen("Success");
+                            } else {
+                                printRed("Failed");
+                            }
+                        } catch (SoapFaultClientException e){
+                            printRed(e.getFaultStringOrReason());
                         }
                         break;
                     }
                     case "5": {
-                        Wine wine = getConsoleWine(true, false);
-                        List<Wine> wines = wineClient.getWine(wine).getWine();
+                        try {
+                            Wine wine = getConsoleWine(true, false);
+                            List<Wine> wines = wineClient.getWine(wine).getWine();
 
-                        if (wines.isEmpty()) {
-                            printRed("Wine is not found!");
-                        } else {
-                            for (Wine wine_i : wines) {
-                                printWine(wine_i);
-                                printRegular("");
+                            if (wines.isEmpty()) {
+                                printRed("Wine is not found!");
+                            } else {
+                                for (Wine wine_i : wines) {
+                                    printWine(wine_i);
+                                    printRegular("");
+                                }
                             }
+                        } catch (SoapFaultClientException e){
+                            printRed(e.getFaultStringOrReason());
                         }
                         break;
                     }
