@@ -9,15 +9,11 @@
 		<!-- lookup parent from repository -->
 		<relativePath/>
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>consuming-web-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>consuming-web-service</name>
-	<description>Demo project for Spring Boot</description>
-
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
+	<groupId>com.itmo.wst</groupId>
+	<artifactId>wine-web-service-client</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>wine-web-service-client</name>
+	<description>Wine info web-service client</description>
 
 	<dependencies>
 		<dependency>
@@ -37,17 +33,6 @@
 		</dependency>
 		<!-- end::dependency[] -->
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 	</dependencies>
 
 	<!-- tag::profile[] -->
@@ -80,11 +65,12 @@
 					<artifactId>maven-jaxb2-plugin</artifactId>
 					<version>0.14.0</version>
 					<executions>
-						<execution>
+						<!--<execution>
 							<goals>
 								<goal>generate</goal>
 							</goals>
 						</execution>
+						-->
 					</executions>
 					<configuration>
 						<schemaLanguage>WSDL</schemaLanguage>

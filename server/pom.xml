@@ -6,16 +6,16 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- use parent to avoid version control -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>wine-web-service</artifactId>
+	<groupId>com.itmo.wst</groupId>
+	<artifactId>wine-web-service-server</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>wine-web-service</name>
-	<description>Wine info web-service</description>
+	<name>wine-web-service-server</name>
+	<description>Wine info web-service server</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.11</java.version>
 	</properties>
 
 	<dependencies>
@@ -44,17 +44,6 @@
 			<version>42.2.6</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -67,35 +56,37 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
 				<version>2.5.0</version>
-				<executions>
-					<execution>
-						<id>xjc</id>
-						<goals>
-							<goal>xjc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<sources>
-						<source>${project.basedir}/src/main/resources/wines.xsd</source>
-					</sources>
-					<xjbSources>
-						<xjbSource>${project.basedir}/src/main/resources/wines.xjb</xjbSource>
-					</xjbSources>
-					<packageName>com.itmo.wst.model</packageName>
-					<outputDirectory>src/main/java</outputDirectory>
-					<clearOutputDir>false</clearOutputDir>
-				</configuration>
-			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-            <!-- end::xsd[] -->
+			<!-- generating of classes
+            <executions>
+                <execution>
+                    <id>xjc</id>
+                    <goals>
+                        <goal>xjc</goal>
+                    </goals>
+                </execution>
+            </executions>
+            -->
+            <configuration>
+                <sources>
+                    <source>${project.basedir}/src/main/resources/wines.xsd</source>
+                </sources>
+                <xjbSources>
+                    <xjbSource>${project.basedir}/src/main/resources/wines.xjb</xjbSource>
+                </xjbSources>
+                <packageName>com.itmo.wst.model</packageName>
+                <outputDirectory>src/main/java</outputDirectory>
+                <clearOutputDir>false</clearOutputDir>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>11</source>
+                <target>11</target>
+            </configuration>
+        </plugin>
+        <!-- end::xsd[] -->
 		</plugins>
 	</build>
 

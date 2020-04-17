@@ -13,14 +13,14 @@ import org.springframework.ws.soap.client.SoapFaultClientException;
 import com.itmo.wst.wsdl.*;
 
 @SpringBootApplication
-public class ConsumingWebServiceApplication {
+public class WineWebServiceClientApplication {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_BLACK = "\033[1;30m";
     private static final String ANSI_RED = "\033[1;31m";
     private static final String ANSI_GREEN = "\033[1;32m";
 
     public static void main(String[] args) {
-        SpringApplication.run(ConsumingWebServiceApplication.class, args);
+        SpringApplication.run(WineWebServiceClientApplication.class, args);
     }
 
     @Bean
@@ -30,7 +30,7 @@ public class ConsumingWebServiceApplication {
 
             while (true) {
                 printRegular("Enter an operation number:\n\t1.Get wine\n\t2.Create wine\n\t3.Update wine\n\t4.Delete wine\n\t5.Find wines\n\t6.Exit");
-                switch (in.nextLine()) {
+                switch (in.nextLine() ) {
                     case "1": {
                         try {
                             Wine wine = new Wine();
