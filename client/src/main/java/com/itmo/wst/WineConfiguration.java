@@ -19,7 +19,7 @@ public class WineConfiguration {
 	@Bean
 	public WineClient wineClient(Jaxb2Marshaller marshaller) {
 		WineClient client = new WineClient();
-		client.setDefaultUri("http://localhost:8080/ws");
+		client.setDefaultUri("http://localhost:8090/ws");
 		client.setMarshaller(marshaller);
 		client.setUnmarshaller(marshaller);
 		return client;
