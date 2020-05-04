@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigInteger;
@@ -40,6 +41,7 @@ public class ConsumingRestApplication {
 				printRegular("Enter an operation number:\n\t1.Get wine\n\t2.Create wine\n\t3.Update wine\n\t4.Delete wine\n\t5.Find wines\n\t6.Exit");
 				switch (in.nextLine()) {
 					case "1": {
+                        try {
 							Wine wine = new Wine();
 							BigInteger id = getConsoleId("Enter a wine id:", true);
 							wine.setId(id);
@@ -51,15 +53,23 @@ public class ConsumingRestApplication {
 							} else {
 								printWine(wines.get(0));
 							}
+                        } catch (HttpServerErrorException e){
+                            printRed("Unexpected error! Try again!");
+                        }
 						break;
 					}
 					case "2": {
+						try {
 							Wine wine = getConsoleWine(false, true);
 							CreateWineResponse response = wineClient.createWine(wine);
 							printGreen("Wine's id: " + response.getId());
+                        } catch (HttpServerErrorException e){
+                            printRed("Unexpected error! Try again!");
+                        }
 						break;
 					}
 					case "3": {
+                        try {
 							Wine wine = getConsoleWine(true, false);
 							Status status = wineClient.updateWine(wine).getStatus();
 
@@ -68,9 +78,13 @@ public class ConsumingRestApplication {
 							} else {
 								printRed("Failed");
 							}
+                        } catch (HttpServerErrorException e){
+                            printRed("Unexpected error! Try again!");
+                        }
 						break;
 					}
 					case "4": {
+                        try {
 							BigInteger id = getConsoleId("Enter a wine id:", true);
 							Status status = wineClient.deleteWine(id).getStatus();
 
@@ -79,9 +93,13 @@ public class ConsumingRestApplication {
 							} else {
 								printRed("Failed");
 							}
+						} catch (HttpServerErrorException e){
+                            printRed("Unexpected error! Try again!");
+						}
 						break;
 					}
 					case "5": {
+                        try {
 							Wine wine = getConsoleWine(true, false);
 							List<Wine> wines = wineClient.getWine(wine).getWine();
 
@@ -93,6 +111,9 @@ public class ConsumingRestApplication {
 									printRegular("");
 								}
 							}
+                        } catch (HttpServerErrorException e){
+                            printRed("Unexpected error! Try again!");
+                        }
 						break;
 					}
 					case "6": {
