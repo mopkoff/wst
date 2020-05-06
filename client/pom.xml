@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.itmo.wst</groupId>
-	<artifactId>consuming-rest</artifactId>
+	<artifactId>wine-web-service-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>consuming-rest</name>
-	<description>Demo project for Spring Boot</description>
+	<name>wine-web-service-client</name>
+	<description>Wine info web-service client</description>
 
 	<properties>
 		<java.version>1.8</java.version>
