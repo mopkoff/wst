@@ -26,8 +26,9 @@ public class WineEndpoint {
 	private WineRepositoryImpl wineRepository;
 
 	@RequestMapping(value = "rest/wines/get", method = RequestMethod.POST)
-	public GetWineResponse getWine(@RequestBody GetWineRequest request) throws IncorrectFormatException {
+	public GetWineResponse getWine(@RequestBody GetWineRequest request) throws IncorrectFormatException, InterruptedException {
 		GetWineResponse response = new GetWineResponse();
+		Thread.sleep(1000);
 		try {
 			response.getWine().addAll(wineRepository.findByWine(request.getWine()));
 		} catch (NullPointerException npe){
@@ -102,4 +103,5 @@ public class WineEndpoint {
 		}
 		return response;
 	}
+
 }
